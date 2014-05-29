@@ -1,0 +1,66 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// hover is mouse over
+// focus is tabbed to
+// active is clicked
+// opacity: 65;
+// filter: alpha(opacity=65);
+
+// .btn-success:hover, .btn-success:focus {
+//   background-color: white;
+//   border-color: #449d44;
+//   color: #5cb85c;
+// }
+
+// .btn-success:active {
+//   color: white;
+//   background-color: #5cb85c;
+// }
+
+.btn-list {
+  @extend .btn-primary;
+  background-color: white;
+  border-color: #357ebd;
+  color: #428bca;
+  min-width: 50%;
+  border-radius: 50px;
+}
+
+.btn-list:hover, .btn-list:focus, .btn-list:active {}
+
+.btn-list:active, .btn-list.active {
+  outline: 0;
+  background-image: none;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.btn-list:hover, .btn-list:focus, .btn-list:active, .btn-list.active, .open > .btn-list.dropdown-toggle {
+  color: white;
+  background-color: #3071a9;
+  border-color: #285e8e;
+}
+
+.btn-list:active, .btn-list.active, .open > .btn-list.dropdown-toggle {
+  background-image: none;
+}
+.btn-list .badge {
+  color: #428bca;
+  background-color: white;
+}
+
+.list-item {
+  border-radius: 100px;
+}
+
+.delete-me {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  color: white;
+}
+
+.hidden-date {
+  display: none;
+}

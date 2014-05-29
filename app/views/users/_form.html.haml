@@ -1,0 +1,19 @@
+First Name:
+= f.text_field :first_name
+%br
+Last Name:
+= f.text_field :last_name
+%br
+You Are A(n):
+= f.select :type, user_types.each.collect {|c| [c, c]}
+%br
+Email:
+= f.email_field :email
+%br
+Password
+= f.password_field :password
+%br
+Password Confirmation
+= f.password_field :password_confirmation
+%br
+= f.submit "Submit"

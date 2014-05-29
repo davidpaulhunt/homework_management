@@ -1,0 +1,10 @@
+%h1 Reset Password
+
+= form_tag password_resets_path do
+  = label_tag :email
+  = text_field_tag :email, params[:email]
+  %br
+  = submit_tag "Reset"
+%br
+= link_to "Or register", new_user_path
+= link_to "Cancel", login_path

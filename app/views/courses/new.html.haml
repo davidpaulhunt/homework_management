@@ -1,0 +1,6 @@
+%h1 Add a Course
+%br
+= form_for Course.new do |f|
+  = render 'form', f:f
+
+= link_to "Cancel", users_path

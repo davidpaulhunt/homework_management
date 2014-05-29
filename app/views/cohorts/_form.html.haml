@@ -1,0 +1,22 @@
+Create
+%strong a Cohort
+in
+= f.select :location_id, Location.all.collect {|c| [c.where, c.id]}
+%br
+%br
+%strong teaching students
+= f.select :course_id, Course.all.collect {|c| [c.title, c.id]}
+%br
+%br
+starting
+%strong on
+= f.date_select :start_date
+and
+%br
+%br
+ending on
+= f.date_select :end_date
+%br
+%br
+= f.submit "Save Cohort", class: "btn btn-sm btn-success"
+= link_to "Cancel", users_path, class: "btn btn-sm btn-default"

@@ -1,0 +1,7 @@
+%tr
+  %td= user.full_name
+  %td= user.email
+  %td= user.type
+  %td
+  %td= link_to "Edit User", edit_user_path(user), class: "btn btn-xs btn-info"
+  %td= link_to "Delete User", user_path(user), method: "delete", :data => { confirm: "This is permanent! Are you sure you'd like to delete this user?" }, class: "btn btn-xs btn-danger"
