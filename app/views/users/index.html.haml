@@ -1,52 +1,7 @@
-%table.table.table-striped.table-hover
-  %thead
-    %th Name
-    %th Email
-    %th Role
-    %th
-    %th
-    %th
-  %tbody
-    - @users.each do |user|
-      = render 'user', user: user
-%br
-%br
-.row
-  .col-md-4
-    %h3
-      Locations
-      = link_to "New Location", new_location_path, class: "btn btn-xs btn-success"
-    %legend
-    - unless Location.all.count == 0
-      %ul
-        - Location.all.each do |location|
-          %li
-            = link_to "#{location.where}", edit_location_path(location), class: "btn btn-xs btn-list"
-            = link_to "X", location_path(location), method: "delete", class: "btn btn-xs btn-danger list-item", :data => {confirm: "Delete #{location.where}? This is permanent."}
-          %br
-  .col-md-4
-    %h3
-      Courses
-      = link_to "New Course", new_course_path, class: "btn btn-xs btn-success"
-    %legend
-    - unless Course.all.count == 0
-      %ul
-        - Course.all.each do |course|
-          %li
-            = link_to "#{course.title}", edit_course_path(course), class: "btn btn-xs btn-list"
-            = link_to "X", course_path(course), method: "delete", class: "btn btn-xs btn-danger list-item", :data => {confirm: "Delete #{course.title}? This is permanent."}
-          %br
-    %br
-  .col-md-4
-    %h3
-      Cohorts
-      = link_to "New Cohort", new_cohort_path, class: "btn btn-xs btn-success"
-    %legend
-    - unless Cohort.all.count == 0
-      %ul
-        - Cohort.all.each do |cohort|
-          %li
-            = link_to "#{cohort.listing}", edit_cohort_path(cohort), class: "btn btn-xs btn-list"
-            = link_to "X", cohort_path(cohort), method: "delete", class: "btn btn-xs btn-danger list-item", :data => {confirm: "Delete this #{cohort.listing}? This is permanent."}
-            %div.hidden-date= cohort.start_date
-          %br
+- case @type
+- when "Admin"
+  = render 'admin_panel'
+- when "Student"
+  = render 'student_panel'
+- else
+  %h1 I work!

@@ -6,7 +6,15 @@ class Cohort < ActiveRecord::Base
   belongs_to :location
 
   def listing
-    course.title + " in " + location.where
+    course.title.titleize + " in " + location.city.capitalize + ", " + location.state.upcase
+  end
+
+  def when
+    format_date(start_date)
+  end
+
+  def format_date(date)
+    date.strftime("%b %d, %y")
   end
 
 end

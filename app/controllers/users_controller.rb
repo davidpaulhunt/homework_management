@@ -18,7 +18,13 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    case current_user.type
+    when "Admin"
+      @users = User.all
+    when "Instructor" || "TeachingAssistant"
+      @users = current_user.cohort.students unless current_user.cohort.nil?
+    end
+    @type = current_user.type
   end
 
   def show
@@ -32,7 +38,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      redirect_to users_path
+      choose_path(@user)
     else
       render :edit, notice: "Sorry, there was an error. Please try again later."
     end
@@ -41,7 +47,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy! unless @user.id == current_user.id
-    redirect_to users_path
+    choose_path(@user)
   end
 
   private
