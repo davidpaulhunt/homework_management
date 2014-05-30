@@ -3,23 +3,20 @@ Rails.application.routes.draw do
   resources :password_resets
 
   resources :sessions, only: [:new, :create, :destroy]
-  
-  resources :enrollments
-  resources :locations
-  resources :submissions
-  resources :comments
 
   resources :admins, controller: 'users', type: 'Admin'
   resources :instructors, controller: 'users', type: 'Instructor'
   resources :teaching_assistants, controller: 'users', type: 'TeachingAssistant'
-  resources :students, controller: 'users', type: 'Student'
+  
+  resources :students, controller: 'users', type: 'Student' do
+    resources :enrollments
+  end
 
+  resources :locations
   resources :courses
   resources :cohorts
 
   resources :users do
-    resources :enrollments
-
     resources :submissions
   end
 

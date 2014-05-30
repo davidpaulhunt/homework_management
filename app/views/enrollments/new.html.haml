@@ -1,0 +1,4 @@
+%h1 New Enrollment
+%br
+= form_for Enrollment.new, url: student_enrollments_path(current_user.id), method: "post" do |f|
+  = render 'form', f:f

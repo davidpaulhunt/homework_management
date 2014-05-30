@@ -1,0 +1,7 @@
+%tr
+  %td= enrollment.cohort.course.title
+  %td= enrollment.cohort.location.where
+  %td= enrollment.cohort.when
+  %td
+  %td
+  %td= link_to "Cancel Enrollment", student_enrollment_path(current_user, enrollment), method: "delete", :data => { confirm: "This is permanent! Are you sure you'd like to cancel this enrollment?" }, class: "btn btn-xs btn-danger"

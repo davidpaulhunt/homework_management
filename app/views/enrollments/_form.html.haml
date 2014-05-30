@@ -1,0 +1,13 @@
+What Cohort would you like to attend?
+= f.hidden_field :student_id, value: current_user.id
+%br
+- Cohort.all.each do |cohort|
+  = f.label "#{cohort.listing}"
+  = f.label "#{cohort.when}"
+  = f.radio_button :cohort_id, cohort.id
+%br
+%br
+= f.submit "Save Enrollment", class: "btn btn-sm btn-success", :data => { confirm: "Enroll?" }
+= link_to "Cancel", students_path, class: "btn btn-sm btn-default"
+
+/ Cohort.all.collect {|c| [(c.listing + " " + c.when), c.id]}
