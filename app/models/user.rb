@@ -32,9 +32,9 @@ class User < ActiveRecord::Base
 
   private
 
-  def generate_temp_password
-    @temp = SecureRandom.urlsafe_base64(6)
-  end
+  # def generate_temp_password
+  #   @temp = SecureRandom.urlsafe_base64(6)
+  # end
 
   def generate_token(column)
     begin
