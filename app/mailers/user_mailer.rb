@@ -17,4 +17,19 @@ class UserMailer < ActionMailer::Base
     mail(to: user.email, subject: "Your password reset request from The Iron Yard")
   end
 
+  def new_submission_created(user, submission)
+    @student = user
+    @submission = submission
+    notify_instructor_new_submission(user, submission)
+    mail(to: user.email, subject: "Submission received! :)")
+  end
+
+  def notify_instructor_new_submission(user, submission)
+    @student = user
+    @submission = submission
+    @cohort = submission.assignment.cohort
+    @instructor = @cohort.instructor
+    mail(to: @instructor.email, subject: "New submission by #{@student.full_name}in #{@cohort.listing}")
+  end
+
 end

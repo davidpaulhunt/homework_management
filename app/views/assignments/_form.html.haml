@@ -1,0 +1,12 @@
+= f.hidden_field :cohort_id, value: current_user.cohort.id
+= f.label :title
+= f.text_field :title
+%br
+= f.label :content
+= f.text_area :content
+%br
+= f.label "Due on: "
+= f.date_select :due_date
+%br
+= f.submit "Save Assignment", class: "btn btn-md btn-success"
+= link_to "Cancel", instructors_path, class: "btn btn-md btn-default"

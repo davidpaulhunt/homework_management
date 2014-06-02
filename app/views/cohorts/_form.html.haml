@@ -18,5 +18,10 @@ ending on
 = f.date_select :end_date
 %br
 %br
+with
+= f.select :instructor_id, Instructor.all.collect {|c| [c.full_name, c.id]}
+%strong instructing.
+%br
+%br
 = f.submit "Save Cohort", class: "btn btn-sm btn-success"
 = link_to "Cancel", users_path, class: "btn btn-sm btn-default"

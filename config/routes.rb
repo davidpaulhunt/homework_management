@@ -10,17 +10,18 @@ Rails.application.routes.draw do
   
   resources :students, controller: 'users', type: 'Student' do
     resources :enrollments
+    resources :submissions, only: :show
   end
 
   resources :locations
   resources :courses
   resources :cohorts
+  resources :comments
 
-  resources :users do
-    resources :submissions
-  end
+  resources :users
 
   resources :assignments do
+    resources :submissions
     resources :comments
   end
   

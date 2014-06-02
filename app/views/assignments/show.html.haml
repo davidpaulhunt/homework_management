@@ -1,0 +1,47 @@
+= link_to "Back to All Assignments", cohort_path(@assignment.cohort), class: "btn btn-sm btn-default"
+%br
+%br
+%legend
+  = @assignment.title
+  - if current_user.type == "Instructor"
+    = link_to "Edit Assignment", edit_assignment_path(@assignment), class: "btn btn-xs btn-primary"
+  %br
+%p= @assignment.content
+%strong= @assignment.due_date
+%br
+%br
+
+
+%br
+- case current_user.type
+  - when "Instructor"
+    = render 'instructor_options', assignment: @assignment
+  - when "Student"
+    = render 'student_options', assignment: @assignment
+
+%br
+%br
+%br
+.row
+  .col-md-2
+  .col-md-8
+    Comments
+    %table.table
+      - @assignment.comments.each do |comment|
+        - if comment.created_at.nil?
+          %tr
+            %td
+              %p= comment.content
+        - else
+          %tr
+            %td
+              %p= comment.content
+              %p= time_since(comment)
+    = form_for @new_comment, url: comments_path, method: :post do |f|
+      = f.hidden_field :user_id, value: current_user.id
+      = f.hidden_field :commentable_id, value: @assignment.id
+      = f.hidden_field :commentable_type, value: "Assignment"
+      .col-md-4
+        = f.text_area :content, :class => "form-control"
+      = f.submit "Leave Comment", :class => "btn btn-info"
+  .col-md-2

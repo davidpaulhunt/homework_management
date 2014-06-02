@@ -1,0 +1,6 @@
+= f.hidden_field :student_id, value: current_user.id
+Your Submission:
+%br
+= f.text_area :content, style: "min-width:300px;height:100%;"
+%br
+= f.submit "Submit", class: "btn btn-md btn-success"
