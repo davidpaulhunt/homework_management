@@ -1,0 +1,47 @@
+%h3 Cohort Students
+%table.table.table-striped.table-hover
+  %thead
+    %th Name
+    %th Email
+    %th
+    %th
+    %th
+  %tbody
+    - unless @users.nil?
+      - @users.each do |user|
+        = render 'user', user: user
+%br
+%br
+.row
+  .col-md-4
+    %h3 Where You Can Find Us
+    %legend
+    - unless Location.all.count == 0
+      %ul
+        - Location.all.each do |location|
+          %li
+            %div.btn.btn-xs.btn-list
+              = location.where
+          %br
+  .col-md-4
+    %h3 Courses We Provide
+    %legend
+    - unless Course.all.count == 0
+      %ul
+        - Course.all.each do |course|
+          %li
+            %div.btn.btn-xs.btn-list
+              = course.title
+          %br
+    %br
+  .col-md-4
+    %h3 Upcoming Cohorts
+    %legend
+    - unless Cohort.all.count == 0
+      %ul
+        - Cohort.all.each do |cohort|
+          %li
+            %div.btn.btn-xs.btn-list
+              = cohort.listing
+            %div.hidden-date= cohort.start_date
+          %br

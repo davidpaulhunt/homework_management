@@ -1,0 +1,6 @@
+- if my_submission(assignment).nil?
+  = link_to "Complete Assignment", new_assignment_submission_path(assignment), class: "btn btn-sm btn-primary"
+- else
+  %p= link_to "View My Submission", student_submission_path(current_user, my_submission(assignment))
+  %p= link_to "Edit My Submission", edit_submission_path(my_submission(assignment))
+  %p= my_submission(assignment).content

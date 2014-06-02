@@ -1,5 +1,5 @@
 %tr
-  %td= enrollment.cohort.course.title
+  %td= link_to "#{enrollment.cohort.course.title}", cohort_path(enrollment.cohort)
   %td= enrollment.cohort.location.where
   %td= enrollment.cohort.when
   %td

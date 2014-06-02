@@ -1,0 +1,30 @@
+%h1 Submission
+%br
+%p= "by #{@submission.student.full_name}"
+%p= @submission.content
+%br
+%br
+%br
+.row
+  .col-md-2
+  .col-md-8
+    Comments
+    %table.table
+      - @submission.comments.each do |comment|
+        - if comment.created_at.nil?
+          %tr
+            %td
+              %p= comment.content
+        - else
+          %tr
+            %td
+              %p= comment.content
+              %p= time_since(comment)
+    = form_for @new_comment, url: comments_path, method: :post do |f|
+      = f.hidden_field :user_id, value: current_user.id
+      = f.hidden_field :commentable_id, value: @submission.id
+      = f.hidden_field :commentable_type, value: "Submission"
+      .col-md-4
+        = f.text_area :content, :class => "form-control"
+      = f.submit "Leave Comment", :class => "btn btn-info"
+  .col-md-2

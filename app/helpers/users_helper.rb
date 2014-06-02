@@ -16,4 +16,8 @@ module UsersHelper
     action ? "#{action}_" : ""
   end
 
+  def my_submission(assignment_id)
+    @my_submission = current_user.get_my_submission(assignment_id).first
+  end
+
 end
