@@ -16,6 +16,8 @@
 - case current_user.type
   - when "Instructor"
     = render 'instructor_options', assignment: @assignment
+  - when "TeachingAssistant"
+    = render 'ta_options', assignment: @assignment
   - when "Student"
     = render 'student_options', assignment: @assignment
 

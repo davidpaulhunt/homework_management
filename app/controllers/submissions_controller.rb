@@ -20,6 +20,7 @@ class SubmissionsController < ApplicationController
   end
 
   def show
+    Notification.mark_reviewed(params[:id], current_user.id)
     @new_comment = @submission.comments.build
   end
 

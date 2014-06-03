@@ -1,5 +1,7 @@
 class CoursesController < ApplicationController
 
+  before_filter :is_admin, only: [:new, :create, :edit, :update, :destroy]
+
   def new
     @course = Course.new
   end
@@ -8,7 +10,7 @@ class CoursesController < ApplicationController
     @course = Course.new(course_params)
     # @course.title = @course.title.titleize
     @course.save
-    redirect_to users_path
+    redirect_to admins_path
   end
 
   def index
@@ -28,13 +30,13 @@ class CoursesController < ApplicationController
     @course.update(course_params)
     @course.title = @course.title.titleize
     @course.save
-    redirect_to users_path
+    redirect_to admins_path
   end
 
   def destroy
     @course = Course.find(params[:id])
     @course.destroy
-    redirect_to users_path
+    redirect_to admins_path
   end
 
   private

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :ensure_logged_in
 
-  helper_method :current_user, :is_admin, :choose_path
+  helper_method :current_user, :is_admin, :is_instructor, :choose_path
 
   def ensure_logged_in
     if current_user.nil?
@@ -20,7 +20,15 @@ class ApplicationController < ActionController::Base
   end
 
   def is_admin
-    current_user.type == "Admin"
+    if current_user.type != "Admin"
+      choose_path(current_user)
+    end
+  end
+
+  def is_instructor
+    if current_user.type != "Instructor"
+      choose_path(current_user)
+    end
   end
 
   def choose_path(user)

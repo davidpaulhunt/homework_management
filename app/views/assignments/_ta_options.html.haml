@@ -1,0 +1,20 @@
+%br
+%br
+
+- if assignment.submissions
+  %h3 Student Submissions
+  %table.table.table-striped.table-hover
+    %thead
+      %th Student
+      %th Submitted at
+      %th
+      %th
+      %th
+    %tbody
+      - assignment.submissions.each do |submission|
+        %tr
+          %td= link_to "#{submission.student.full_name}", submission
+          %td= submission.created_at
+          %td
+          %td
+          %td

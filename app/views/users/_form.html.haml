@@ -5,7 +5,10 @@ Last Name:
 = f.text_field :last_name
 %br
 You Are A(n):
-= f.select :type, user_types.each.collect {|c| [c, c]}
+- if current_user
+  = f.label "#{current_user.type}"
+- else
+  = f.select :type, user_types.each.collect {|c| [c, c]}
 %br
 Email:
 = f.email_field :email

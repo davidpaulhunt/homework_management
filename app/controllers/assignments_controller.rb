@@ -1,6 +1,7 @@
 class AssignmentsController < ApplicationController
 
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
+  before_filter :is_instructor, only: [:new, :create, :edit, :update, :destroy]
 
   def new
     @assignment = Assignment.new
@@ -19,6 +20,7 @@ class AssignmentsController < ApplicationController
   end
 
   def show
+    Notification.mark_reviewed(params[:id], current_user.id)
     @new_comment = @assignment.comments.build
   end
 

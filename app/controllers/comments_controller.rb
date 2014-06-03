@@ -11,6 +11,12 @@ class CommentsController < ApplicationController
     end
   end
 
+  def show
+    @comment = Comment.find(params[:id])
+    Notification.mark_reviewed(params[:id], current_user.id)
+    redirect_to load_commentable(@comment)
+  end
+
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy!
@@ -22,9 +28,9 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:id, :content, :commentable_id, :commentable_type, :user_id)
   end
 
-  def load_commentable
-    id = params[:comment][:commentable_id]
-    resource = params[:comment][:commentable_type].constantize
+  def load_commentable(comment)
+    id = comment.commentable_id
+    resource = comment.commentable_type.constantize
     resource.find(id)
   end
 

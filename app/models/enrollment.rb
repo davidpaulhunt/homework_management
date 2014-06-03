@@ -1,4 +1,4 @@
 class Enrollment < ActiveRecord::Base
-  belongs_to :student
-  belongs_to :cohort
+  belongs_to :student, dependent: :destroy
+  belongs_to :cohort, dependent: :destroy
 end

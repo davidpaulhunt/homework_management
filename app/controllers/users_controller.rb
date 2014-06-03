@@ -21,7 +21,9 @@ class UsersController < ApplicationController
     case current_user.type
     when "Admin"
       @users = User.all
-    when "Instructor" || "TeachingAssistant"
+    when "Instructor"
+      @users = current_user.cohort.students unless current_user.cohort.nil?
+    when "TeachingAssistant" || "TeachingAssistant"
       @users = current_user.cohort.students unless current_user.cohort.nil?
     end
     @type = current_user.type
@@ -32,7 +34,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    if current_user.type == "Admin"
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
   end
   
   def update
@@ -70,6 +76,9 @@ class UsersController < ApplicationController
 
   def type_class 
       type.constantize 
+  end
+
+  def restrict_users
   end
 
 end

@@ -1,5 +1,7 @@
 class CohortsController < ApplicationController
 
+  before_filter :is_admin, only: [:new, :create, :edit, :update, :destroy]
+
   def new
     @cohort = Cohort.new
   end
@@ -7,7 +9,7 @@ class CohortsController < ApplicationController
   def create
     @cohort = Cohort.new(cohort_params)
     @cohort.save
-    redirect_to users_path
+    redirect_to admins_path
   end
 
   def index
@@ -20,12 +22,18 @@ class CohortsController < ApplicationController
 
   def edit
     @cohort = Cohort.find(params[:id])
+  end
+
+  def update
+    @cohort = Cohort.find(params[:id])
     @cohort.update(cohort_params)
+    redirect_to admins_path
   end
 
   def destroy
     @cohort = Cohort.find(params[:id])
     @cohort.destroy
+    redirect_to admins_path
   end
 
   private

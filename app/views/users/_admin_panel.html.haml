@@ -43,7 +43,7 @@
       = link_to "New Cohort", new_cohort_path, class: "btn btn-xs btn-success"
     %legend
     - unless Cohort.all.count == 0
-      %ul
+      %ul#cohorts
         - Cohort.all.each do |cohort|
           %li
             = link_to "#{cohort.listing}", edit_cohort_path(cohort), class: "btn btn-xs btn-list"

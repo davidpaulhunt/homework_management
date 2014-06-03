@@ -5,6 +5,7 @@ class Cohort < ActiveRecord::Base
   belongs_to :course
   belongs_to :location
   belongs_to :instructor
+  belongs_to :teaching_assistant
 
   def listing
     course.title.titleize + " in " + location.city.capitalize + ", " + location.state.upcase
@@ -26,7 +27,7 @@ class Cohort < ActiveRecord::Base
       end
     end
     @users << self.instructor unless nil
-    # @users << self.teaching_assistant unless nil
+    @users << self.teaching_assistant unless nil
     @users
   end
 

@@ -9,7 +9,13 @@
   %tbody
     - unless @users.nil?
       - @users.each do |user|
-        = render 'user', user: user
+        = render 'student', student: user
+%br
+%br
+
+%legend Cohort Assignments
+.row
+  = render current_user.cohort.assignments unless nil
 %br
 %br
 .row

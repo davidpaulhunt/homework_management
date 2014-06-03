@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates_presence_of :type
 
   has_many :comments
+  has_many :notifications, dependent: :destroy
 
   after_create :welcome_user
 
@@ -16,14 +17,14 @@ class User < ActiveRecord::Base
   scope :students, -> { where(type: 'Student') }
 
   def welcome_user
-    UserMailer.your_account_created(self).deliver
+    WelcomeUserJob.new.async.perform(self)
   end
 
   def send_password_reset
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.reset_user_password(self).deliver
+    PasswordResetJob.new.async.perform(self)
   end
 
   def full_name

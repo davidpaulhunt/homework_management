@@ -10,29 +10,26 @@ Rails.application.routes.draw do
   
   resources :students, controller: 'users', type: 'Student' do
     resources :enrollments
-    resources :submissions, only: :show
+    resources :submissions, only: [:index, :show, :edit, :update, :destroy]
   end
 
   resources :locations
   resources :courses
   resources :cohorts
   resources :comments
-
-  resources :users
-
+  resources :users do
+    resources :notifications
+  end
   resources :assignments do
-    resources :submissions
-    resources :comments
+    resources :submissions, only: [:new, :create, :index]
   end
-  
-  resources :submissions do
-    resources :comments
-  end
+  resources :submissions
 
   get "login" => "sessions#new"
   get "logout" => "sessions#destroy"
   get "reset_password" => "sessions#reset_password"
   post "reset_password/sending" => "sessions#send_reset_code"
+  post "notification/review" => "notifications#mark_reviewed"
 
   root 'users#index'
   # The priority is based upon order of creation: first created -> highest priority.

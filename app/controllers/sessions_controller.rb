@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   skip_filter :ensure_logged_in
+  before_filter :in_session, only: :new
 
   def new
   end
@@ -20,6 +21,14 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to login_path, notice: "You logged out!"
+  end
+
+  private
+
+  def in_session
+    if current_user
+      redirect_to users_path
+    end
   end
 
   
