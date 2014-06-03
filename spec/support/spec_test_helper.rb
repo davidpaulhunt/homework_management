@@ -7,6 +7,11 @@ module SpecTestHelper
     click_button "Login"
   end
 
+  def logout(user)
+    visit '/'
+    click_link "Logout"
+  end
+
   def add_a_location
     click_link "New Location"
     fill_in "location[city]", with: "Atlanta"
@@ -26,6 +31,12 @@ module SpecTestHelper
     fill_in "assignment[title]", with: "A cool assignment"
     fill_in "assignment[content]", with: "This is about dinosaurs!"
     click_button "Save Assignment"
+  end
+
+  def add_a_submission
+    click_link "Complete Assignment"
+    fill_in "submission[content]", with: "My awesome work!"
+    click_button "Submit"
   end
 
 end

@@ -5,7 +5,7 @@ class Assignment < ActiveRecord::Base
   has_many :submissions
   has_many :notifications, as: :notifieable, dependent: :destroy
 
-  after_create :notify_cohort
+  #after_create :notify_cohort
 
   def get_student_submission(student)
     self.submissions.where(student_id: student.id)
