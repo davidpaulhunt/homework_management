@@ -36,96 +36,24 @@ feature "Instructor" do
     Assignment.last.title.should eq("Updated assignment title")
   end
 
-  # scenario "delete an assignment" do
-  #   login(user)
+  # scenario "delete an assignment", js: true do
+  #   background do
+  #     User.make(email: 'instructor@email.com', password: 'password', type: "Instructor")
+  #   end
+  #   visit '/login'
+  #   current_path.should eq("/login")
+  #   within("form") do
+  #     fill_in "email", with: "instructor@email.com"
+  #     fill_in "password", with: "password"
+  #   end
+  #   click_button "Login"
+  #   current_path.should eq('/instructors')
   #   add_an_assignment
   #   click_link "A cool assignment"
   #   current_path.should eq(assignment_path(Assignment.last))
   #   click_link "Delete Assignment"
-  #   page.driver.browser.find("OK")
-  # end
-  
-  # scenario "deleting a location" do
-  #   login(user)
-  #   click_link "New Location"
-  #   fill_in "location[city]", with: "Atlanta"
-  #   fill_in "location[state]", with: "GA"
-  #   click_button "Save Location"
-  #   current_path.should eq('/admins')
-  #   Location.all.count.should > 0
-  #   click_link "X"
-  #   current_path.should eq('/admins')
-  #   Location.all.count.should eq(0)
-  # end
-
-  # scenario "adding a course" do
-  #   login(user)
-  #   click_link "New Course"
-  #   fill_in "course[title]", with: "Rails"
-  #   fill_in "course[technologies]", with: "Ruby, Sinatra, git, javascript"
-  #   click_button "Save Course"
-  #   current_path.should eq('/admins')
-  # end
-
-  # scenario "editing a course" do
-  #   login(user)
-  #   add_a_course
-  #   click_link "Rails"
-  #   fill_in "course[title]", with: "Android"
-  #   click_button "Save Course"
-  #   current_path.should eq('/admins')
-  #   page.should have_content "Android"
-  # end
-
-  # scenario "deleting a course" do
-  #   login(user)
-  #   click_link "New Course"
-  #   fill_in "course[title]", with: "Rails"
-  #   fill_in "course[technologies]", with: "Ruby, Sinatra, git, javascript"
-  #   click_button "Save Course"
-  #   current_path.should eq('/admins')
-  #   Course.all.count.should > 0
-  #   click_link "X"
-  #   current_path.should eq('/admins')
-  #   Course.all.count.should eq(0)
-  # end
-
-  # scenario "adding a cohort" do
-  #   login(user)
-  #   add_a_location
-  #   add_a_course
-  #   click_link "New Cohort"
-  #   click_button "Save Cohort"
-  #   current_path.should eq('/admins')
-  # end
-
-  # scenario "deleting a cohort" do
-  #   login(user)
-  #   add_a_location
-  #   add_a_course
-  #   click_link "New Cohort"
-  #   click_button "Save Cohort"
-  #   current_path.should eq('/admins')
-  #   Cohort.all.count.should > 0
-  #   page.find("#cohorts").click_link "X"
-  #   current_path.should eq('/admins')
-  #   Cohort.all.count.should eq(0)
-  # end
-
-  # scenario "logging out" do
-  #   login(user)
-  #   click_link "Logout"
-  #   current_path.should eq('/login')
-  # end
-
-  # scenario "edit profile" do
-  #   login(user)
-  #   click_link "Edit Profile"
-  #   current_path.should eq(edit_user_path(user))
-  #   fill_in "admin[first_name]", with: "Bob"
-  #   click_button "Submit"
-  #   current_path.should eq('/admins')
-  #   User.last.first_name.should eq('Bob')
+  #   page.driver.accept_js_confirms!
+  #   current_path.should eq('/instructors')
   # end
 
 end

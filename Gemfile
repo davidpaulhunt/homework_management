@@ -23,5 +23,7 @@ gem 'rspec-rails', group: [:development, :test]
 
 group :test do
   gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
   gem 'factory_girl_rails'
 end
