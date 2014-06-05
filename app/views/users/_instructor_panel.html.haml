@@ -8,9 +8,8 @@
       %th
       %th
     %tbody
-      - unless @users.nil?
-        - @users.each do |user|
-          = render 'student', student: user
+      - @users.each do |user|
+        = render 'student', student: user
   %br
   %br
   %h3
