@@ -1,6 +1,6 @@
 - case notification.notifieable_type
   - when "Comment"
-    %li= link_to "Comment by #{notifieable.user.full_name}", notification.notifieable
+    %li= link_to "Comment by #{notification.notifieable.user.full_name}", notification.notifieable
   - when "Assignment"
     %li= link_to "Assignment posted in your Cohort", notification.notifieable
   - when "Submission"
