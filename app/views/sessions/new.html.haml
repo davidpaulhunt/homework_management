@@ -2,7 +2,7 @@
 .col-md-6
   %h1 Login
 
-  = form_tag sessions_path do
+  = form_tag sessions_path, name: "new_session" do
     = text_field_tag :email, params[:email], placeholder: "email"
     = password_field_tag :password, params[:password], placeholder: "password"
     = submit_tag "Login", class: "btn btn-md btn-primary"
