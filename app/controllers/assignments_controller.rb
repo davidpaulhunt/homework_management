@@ -46,11 +46,15 @@ class AssignmentsController < ApplicationController
   private
 
   def assignment_params
-    params.require(:assignment).permit!
+    params.require(:assignment).permit(:title, :due_date, :content, :cohort_id)
   end
 
   def set_assignment
     @assignment = Assignment.find(params[:id])
+  end
+
+  def is_instructor
+    if !current_user.is_instructor? then choose_path(current_user) end
   end
 
 end

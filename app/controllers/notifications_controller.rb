@@ -22,4 +22,8 @@ class NotificationsController < ApplicationController
 
   private
 
+  def notification_params
+    params.require(:notification).permit(:user_id, :notifieable_id, :notifieable_type)
+  end
+
 end

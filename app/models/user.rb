@@ -31,11 +31,15 @@ class User < ActiveRecord::Base
     first_name.capitalize + " " + last_name.capitalize
   end
 
-  private
+  def is_admin?
+    type == "Admin"
+  end
 
-  # def generate_temp_password
-  #   @temp = SecureRandom.urlsafe_base64(6)
-  # end
+  def is_instructor?
+    type == "Instructor"
+  end
+
+  private
 
   def generate_token(column)
     begin

@@ -4,8 +4,8 @@ First Name:
 Last Name:
 = f.text_field :last_name
 %br
-You Are A(n):
-- if current_user
+Role is:
+- if current_user && current_user.type != "Admin"
   = f.label "#{current_user.type}"
 - else
   = f.select :type, user_types.each.collect {|c| [c, c]}

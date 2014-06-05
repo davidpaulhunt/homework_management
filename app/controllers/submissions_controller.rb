@@ -47,7 +47,7 @@ class SubmissionsController < ApplicationController
   private
 
   def submission_params
-    params.require(:submission).permit!
+    params.require(:submission).permit(:assignment_id, :content, :student_id)
   end
 
   def set_submission

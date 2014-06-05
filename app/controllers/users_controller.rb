@@ -18,31 +18,18 @@ class UsersController < ApplicationController
   end
 
   def index
-    case current_user.type
-    when "Admin"
-      @users = User.all
-    when "Instructor"
-      @users = current_user.cohort.students unless current_user.cohort.nil?
-    when "TeachingAssistant" || "TeachingAssistant"
-      @users = current_user.cohort.students unless current_user.cohort.nil?
-    end
+    @users = get_users(current_user)
     @type = current_user.type
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def edit
-    if current_user.type == "Admin"
-      @user = User.find(params[:id])
-    else
-      @user = current_user
-    end
+    @user = current_user.is_admin? ? User.find(params[:id]) : current_user
   end
   
   def update
-    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       choose_path(@user)
     else
@@ -59,26 +46,27 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(type.underscore.to_sym).permit!
+    params.require(type.underscore.to_sym).permit(:first_name, :last_name, :type, :email, :password, :password_confirmation)
   end
 
   def set_user
-    @user = type_class.find(params[:id])
+    if User.where(id: params[:id]).exists?
+      @user = type_class.find(params[:id])
+    else
+      @user = current_user
+    end
   end
 
   def set_type 
-       @type = type 
+    @type = type 
   end
 
   def type 
-      params[:type] || "User" 
+    params[:type] || "User" 
   end
 
   def type_class 
-      type.constantize 
-  end
-
-  def restrict_users
+    type.constantize 
   end
 
 end
